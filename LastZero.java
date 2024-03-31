@@ -4,8 +4,8 @@ import java.util.Scanner;
 class LastZero {
     public static void main(String[] args) {
         LastZero lastZero = new LastZero();
-     // int arr[] = {9, 2, 0, 4, 3, 0, 2, 0};
-       Scanner in = new Scanner(System.in);
+   //  int arr[] = {1, 2, 0, 4, 3, 0, 2, 0};
+         Scanner in = new Scanner(System.in);
         System.out.println("Enter lenght of the array: ");
         int input = in.nextInt();
         int[] arr = new int[input];
@@ -16,23 +16,24 @@ class LastZero {
         System.out.println(Arrays.toString(lastZero.sortedLastZero(arr)));
     }
 
-    public int[] sortedLastZero(int[] a) {
-        int lastIndex = a.length - 1;
-        for (int i = 0; i <= lastIndex; i++) {
-            if (a[i] == 0) {
-                while (lastIndex > i && a[lastIndex] == 0) {
-                    lastIndex--;
+     public int[] sortedLastZero(int[] a) {
+        int zeroCount =0;
+        for(int i=0;i<a.length;i++){
+          for(int j=i;j<a.length;j++){
+            if(j+1 < a.length && a[j]==0){
+                if(i==0 && a[j+1]==0){
+                    zeroCount++;
                 }
+                int temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
 
-                if (lastIndex > i) {
-                    int temp = a[lastIndex];
-                    a[lastIndex] = a[i];
-                    a[i] = temp;
-                    lastIndex--;
-                }
             }
+          }
+           if(i==zeroCount)
+           break;
         }
         return a;
-    }
+}
 }
 
